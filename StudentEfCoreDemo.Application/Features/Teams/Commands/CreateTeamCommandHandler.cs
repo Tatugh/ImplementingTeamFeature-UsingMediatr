@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using StudentEfCoreDemo.Application.DTOs;
-using StudentEfCoreDemo.Application.Features.Students.Commands;
+using StudentEfCoreDemo.Application.Features.Teams;
 using StudentEfCoreDemo.Application.Interfaces;
 using StudentEfCoreDemo.Domain.Entities;
 using System;
@@ -11,33 +11,37 @@ using System.Threading.Tasks;
 
 namespace StudentEfCoreDemo.Application.Features.Teams.Commands
 {
-    public class CreateTeamCommandHandler : IRequestHandler<CreateStudentCommand, StudentDto>
+    public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, CreateTeamDto>
     {
-        private readonly ITeamsRepository _repository;
+        private readonly ITeamRepository _repository;
 
-        public CreateTeamCommandHandler(ITeamsRepository repository)
+        public CreateTeamCommandHandler(ITeamRepository repository)
         {
             _repository = repository;
         }
 
-        public async Task<StudentDto> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
+        public async Task<CreateTeamDto> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
         {
-            var student = new Student
+            var team = new Team
             {
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                Age = request.Age
+                Id = request.Id,
+                Name = request.Name,
+                SportType = request.SportType,
+                FoundedDate = request.FoundedDate,
+                HomeStadium = request.HomeStadium,
+                MaxRosterSize = request.MaxRosterSize,
             };
 
-            var createdStudent = await _repository.AddAsync(student);
-            return new StudentDto
+            var createdTeam = await _repository.AddAsync(team);
+            return new CreateTeamDto
             {
-                Id = createdStudent.Id,
-                FirstName = createdStudent.FirstName,
-                LastName = createdStudent.LastName,
-                Age = createdStudent.Age
+                Id = createdTeam.Id,
+                Name = createdTeam.Name,
+                SportType = createdTeam.SportType,
+                FoundedDate = createdTeam.FoundedDate,
+                HomeStadium = createdTeam.HomeStadium,
+                MaxRosterSize = createdTeam.MaxRosterSize
             };
         }
     }
-}
 }

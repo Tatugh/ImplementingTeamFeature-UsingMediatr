@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MediatR;
+using StudentEfCoreDemo.Application.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentEfCoreDemo.Application.DTOs
+namespace StudentEfCoreDemo.Application.Features.Teams.Commands
 {
-    public class UpdateTeamDto
+    public record UpdateTeamCommand : IRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }

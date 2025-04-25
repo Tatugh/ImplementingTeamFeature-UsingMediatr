@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using StudentEfCoreDemo.Application.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace StudentEfCoreDemo.Application.Features.Teams.Commands
 {
-    public record CreateTeamCommand : IRequest<int>
+    public record CreateTeamCommand : IRequest<CreateTeamDto>
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string SportType { get; set; }
+        public DateTime FoundedDate { get; set; }
+        public string HomeStadium { get; set; }
+        public int MaxRosterSize { get; set; }
     }
 }

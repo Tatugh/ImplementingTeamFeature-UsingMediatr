@@ -7,13 +7,14 @@ using StudentEfCoreDemo.Domain.Entities;
 
 namespace StudentEfCoreDemo.Application.Interfaces
 {
-    public interface ITeamsRepository
+    public interface ITeamRepository
     {
-        Task<IEnumerable<Student>> GetAllAsync();
-        Task<Student?> GetByIdAsync(int id);
-        Task<Student> AddAsync(Student student);
-        Task UpdateAsync(Student student);
-        Task DeleteAsync(int id);
+        Task<IEnumerable<Team>> GetAllAsync();
+        Task<Team?> GetByIdAsync(int id);
+        Task<Team> AddAsync(Team team);
+        Task UpdateAsync(Team team);
+        Task DeleteByIdAsync(int id);
         Task<bool> ExistsAsync(int id);
+
     }
 }
