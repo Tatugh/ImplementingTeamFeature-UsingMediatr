@@ -34,17 +34,21 @@ namespace StudentEfCoreDemo.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TeamDto>> Add(CreateTeamCommand command)
+        public async Task<ActionResult<CreateTeamDto>> Add(CreateTeamCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(UpdateTeamCommand command)
+        public async Task<IActionResult> Update(int id, UpdateTeamCommand command)
         {
+            if (id != command.Id)
+            {
+                return BadRequest();
+            }
             await _mediator.Send(command);
-            return Ok();
+            return NoContent();
         } 
 
         [HttpDelete("{id}")]
@@ -52,7 +56,7 @@ namespace StudentEfCoreDemo.API.Controllers
         {
             var query = new DeleteTeamCommand(id);
             await _mediator.Send(id);
-            return Ok();
+            return NoContent();
         }
     }
 }

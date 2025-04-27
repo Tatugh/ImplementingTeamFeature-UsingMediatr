@@ -32,7 +32,7 @@ namespace StudentEfCoreDemo.Infrastructure.Repositories
         public async Task<Team> AddAsync(Team team)
         {
             await _studentContext.Teams.AddAsync(team);
-            _studentContext.SaveChangesAsync();
+            await _studentContext.SaveChangesAsync();
             return team;
         }
 
